@@ -1,0 +1,30 @@
+{% load bootstrap4 %}
+{% load staticfiles %}
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if title %}
+    <title>{{title}}</title>
+    {% else %}
+    <title>Create Account</title>
+
+    {% endif %}
+
+    {% block styles %}
+      {% bootstrap_css%}
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {% bootstrap_javascript %}
+    {% endblock %}
+
+  </body>
+</html>

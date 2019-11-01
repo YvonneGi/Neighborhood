@@ -1,0 +1,57 @@
+{% extends "registration/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-2">
+    </div>
+
+    <div class="col-md-5" style="margin-top: 5%;">
+
+      {% if form.errors %}
+      <p>Password or Username is incorrect</p>
+      {% endif %}
+
+      <div class="card card-default">
+
+        <div class="card-body">
+          <div class="logo-header">
+            <h1>Neighborhood</h1>
+          </div>
+          <div class="text-center">
+            <form action="/accounts/register/" method="post">
+
+              {% csrf_token%}
+              {% bootstrap_form form layout='inline' %}
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary login-button" value="Sign Up">
+
+
+              </div>
+              <input type="hidden" name="next" value="/">
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card card-default">
+        <div class="card-body text-center">
+          <p>Already have an account? <a href="/accounts/login/"> Sign In</a></p>
+
+        </div>
+      </div>
+    </div>
+    <!-- Empty div -->
+    <div class="col-md-2"></div>
+  </div>
+
+</div>
+
+
+{% endblock %}

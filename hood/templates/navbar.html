@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+ body {
+    margin-top: 2px;
+    background: transparent;
+  }
+
+</style>
+
+<body>
+  <nav class="navbar navbar-dark bg-light " role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div id='left'>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <a href="{%url 'welcome'%}" style="color:black;text-decoration: none;">
+                <img src="https://image.flaticon.com/icons/svg/60/60817.svg" alt="" width="30px" height="35px"
+                  style="margin-right:20px;margin-left: -10px;"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id='center'>
+        <form class="navbar-form navbar-left" action="">
+          <div class="form-group">
+            <input id="input-field" type="text" placeholder='search' style="text-align: center" name="search">
+           
+          </div>
+        </form>
+      </div>
+      <div id='right'>
+        <a class="mr-2" href=""><img src='https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1' 
+          class='nav-icon'></a>
+
+      </div>
+    </div>
+
+  </nav>
+</body>
+
+</html>
