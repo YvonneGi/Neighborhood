@@ -92,3 +92,49 @@ class Neighborhood(models.Model):
 
         self.delete()
 
+
+class Business(models.Model):
+    name = models.CharField(max_length=30)
+    description = HTMLField(blank=True)
+    email = models.EmailField(max_length=70, blank=True)
+    biz_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    biz_hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='biz', null=True)
+
+    '''
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager()
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        businesses = cls.objects.filter(name__icontains=search_term)
+        return businesses
+
+    @classmethod
+    def get_neighborhood_businesses(cls, neighborhood_id):
+        businesses = Business.objects.filter(neighborhood_id=id)
+        return businesses
+
+    @classmethod
+    def get_hood_biz(cls, biz_hood):
+        businesses = Business.objects.filter(biz_hood_pk=biz_hood)
+        return businesses
+
+    @classmethod
+    def get_profile_businesses(cls, profile):
+        businesses = Business.objects.filter(biz_owner__pk=profile)
+        return businesses
+
+
+    def update_business(self):
+
+        ''' Method to update a business in the database'''
+
+        self.update()
+
+    def delete_business(self):
+
+        ''' Method to delete a business from the database'''
+
+        self.delete()
+
