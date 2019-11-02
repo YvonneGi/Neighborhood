@@ -134,3 +134,17 @@ def new_post(request):
     else:
         form = AddPostForm()
     return render(request, 'add_post.html', {"form": form})
+
+
+def search_results(request):
+
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        business_results = Business.search_by_name(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'search.html', {"message": message, "businesses": business_results})
+
+    else:
+        message = "Please enter a search term"
+        return render(request, 'search.html', {"message": message})
