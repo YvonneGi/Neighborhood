@@ -148,4 +148,37 @@ class Join(models.Model):
     def __str__(self):
         return self.user_id
 
+class Post(models.Model):
+    name = models.CharField(max_length=30)
+    image = models.ImageField(upload_to='images/', blank=True)
+    description = HTMLField(blank=True)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post_hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    '''
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager()
+
+    @classmethod
+    def search_post(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
+
+    @classmethod
+    def get_hood_posts(cls, post_hood):
+        posts = Post.objects.filter(post_hood=id)
+        return posts
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
+
+    @classmethod
+    def all_posts(cls,id):
+        posts = Post.objects.all()
+        return posts
+
 
