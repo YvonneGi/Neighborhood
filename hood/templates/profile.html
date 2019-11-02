@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <br>
+  <br>
   <div class="row">
-    
+
     <div class="col-md-3">
-     
+
       {% if user.profile_pic %}
-      <img src="{{user.profile_pic.url}}"  alt="" width="70" height="70">
+      <img src="{{user.profile_pic.url}}" alt="" width="70" height="70">
       {% else %}
       <img
         src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
-         alt="" width="70" height="70">
+        alt="" width="70" height="70">
       {% endif %}
     </div>
 
@@ -23,26 +23,37 @@
 
   {% if user == current_user %}
   <a href="{% url 'edit-profile' %}">
-      <button class="btn btn-dark" type="button" name="button"><img
-          src="https://img.icons8.com/color/48/000000/pencil.png" width="24">Edit Profile</button>
-    </a>
-    <a href="/logout/">
-      <button class="btn btn-danger" type="button" name="button"> <img
-          src="https://img.icons8.com/metro/48/000000/shutdown.png" width="24"> Logout</button>
-    </a>
+    <button class="btn btn-dark" type="button" name="button"><img
+        src="https://img.icons8.com/color/48/000000/pencil.png" width="24">Edit Profile</button>
+  </a>
+  <a href="/logout/">
+    <button class="btn btn-danger" type="button" name="button"> <img
+        src="https://img.icons8.com/metro/48/000000/shutdown.png" width="24"> Logout</button>
+  </a>
   <!-- <a href="">
     <button class="btn btn-secondary" type="button" name="button"><img
         src="https://img.icons8.com/nolan/48/000000/plus-math.png" width="24"> Add Photo</button>
   </a> -->
   <br></br>
   {% endif %}
-  <div class="row">
-      <h4>There are no businesses by {{user.username}}
-        Register one <a style="color:#AD6A00;" href="{% url 'new_biz'  %}">here</a>
-      </h4>
+  <div class="card-columns ">
+    {% for business in businesses %}
+    <div class="card">
+      <div class="card-body" style="background-color:#eceff1;">
+        <h5>{{business.name | upper}}</h5>
+        <h5>{{business.description | safe}}</h5>
+        <p>{{business.email }}</p>
+        <p>Location: {{business.biz_hood.name}}</p>
+      </div>
     </div>
+  </div>
+  {% empty %}
+  <div class="row">
+    <h4>There are no businesses by {{user.username}}
+      Register one <a style="color:#AD6A00;" href="{% url 'new_biz'  %}">here</a>
+    </h4>
+  </div>
+  {% endfor %}
 
 </div>
-
-
 {% endblock %}

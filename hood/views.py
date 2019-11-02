@@ -10,11 +10,26 @@ from .models import *
 import datetime as dt
 
 # Create your views here.
+# @login_required(login_url='/accounts/login/')
+# def welcome(request):
+#     profiles= Profile.objects.all()
+#     current_user = request.user
+#     return render(request,'welcome.html',{"profiles":profiles,"current_user":current_user})
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-    profiles= Profile.objects.all()
-    current_user = request.user
-    return render(request,'welcome.html',{"profiles":profiles,"current_user":current_user})
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Neighborhood.objects.get(pk=request.user.join.hood_id.id)
+            posts = Post.objects.filter(post_hood=request.user.join.hood_id.id)
+            businesses = Business.objects.filter(
+                biz_hood=request.user.join.hood_id.id)
+            return render(request, 'current_hood.html', {"hood": hood, "businesses": businesses, "posts": posts})
+        else:
+            hoods = Neighborhood.all_neighborhoods()
+            return render(request, 'welcome.html', {"hoods": hoods})
+    else:
+        hoods = Neighborhood.all_neighborhoods()
+        return render(request, 'welcome.html', {"hoods": hoods})
 
 @login_required(login_url='/accounts/login/')
 def profile(request,id):
