@@ -7,3 +7,9 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude=['']
+
+
+class AddHoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        exclude = ['user_profile', 'profile']

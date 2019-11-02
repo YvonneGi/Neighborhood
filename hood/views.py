@@ -40,7 +40,7 @@ def edit_profile(request):
     return render(request,'edit_profile.html',locals())
 
 @login_required(login_url='/accounts/login/')
-def add_hood(request):
+def new_hood(request):
     current_user = request.user
     if request.method == 'POST':
         form = AddHoodForm(request.POST, request.FILES)
