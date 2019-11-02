@@ -138,3 +138,14 @@ class Business(models.Model):
 
         self.delete()
 
+class Join(models.Model):
+    '''
+    Updating user location each time they join or leave a neghborhood	
+    '''
+    user_id = models.OneToOneField(User)
+    hood_id = models.ForeignKey(Neighborhood)
+
+    def __str__(self):
+        return self.user_id
+
+
