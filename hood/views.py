@@ -68,3 +68,12 @@ def join_hood(request, hood_id):
         Join(user_id=request.user, hood_id=neighborhood).save()
 
     return redirect('welcome')
+
+@login_required(login_url='/accounts/login/')
+def leave_hood(request, hood_id):
+    '''
+    This function will delete a neighbourhood instance in the join table
+    '''
+    if Join.objects.filter(user_id=request.user).exists():
+        Join.objects.get(user_id=request.user).delete()
+        return redirect('welcome')
