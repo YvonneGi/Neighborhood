@@ -24,94 +24,12 @@
   {% include "navbar.html" %}
 
   {% block content %}
-  <hr>
+ 
   <div class="container-fluid">
     <div class="row">
-
-<!-- 
-      {% for post in posts %}
-      <div class="col-md-3 col-lg-3 "></div>
-      <div class="col-md-6 col-lg-6 ">
-        <div class="card mb-5">
-          <div class="custom-card-header">
-            <div class="float-left modal-image">
-              {% if post.upload_by.profile_pic %}
-              <img src="{{post.upload_by.profile_pic.url}}" class="rounded img-fluid m-1" alt="" width="75px"
-                height="75px">
-              {% else %}
-              <img
-                src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
-                class="rounded img-fluid" alt="" width="75px" height="75px">
-              {% endif %}
-            </div>
-
-            <p class="username m-1">{{post.upload_by.username}}</p><br>
-
-          </div>
-
-          <a href="{{post.photo.url}}" data-fancybox="images"
-            data-buttons='["zoom","slideShow","fullScreen","thumbs","share","close"]' 
-            data-caption='<p>{{post.upload_by.username}}</p>
-                          <p>{{post.caption}}</p>'>
-
-            <img src="{{post.photo.url}}" class="gallery-image ml-1" height="99%" width="99%">
-          </a>
-
-          <p class="card-text username"><span class="caption"> {{post.caption | safe}}</span></p>
-
-          <div class="card-body">
-            <div class="card-footer-section">
-              <h5 class="card-title username float-left">{{post.likes}} likes</h5>
-
-              {% with temp=request.user.id|stringformat:"i"|add:"-"  %}
-              {% with control=post.id|stringformat:"i" %}
-              {% with tempcontrol=temp|add:control %}
-
-
-              {% if tempcontrol in likez %}
-
-              {% else %}
-
-              <form action="{%url 'welcome'%}" method="post" enctype="multipart/form-data">
-                {%csrf_token%}
-                <input type="hidden" name="liker" style="position:relative;left:10px" value='{{post.id}}'>
-                <button class="btn btn-sm btn-link" type="submit"><img class=""
-                    src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-128.png" alt=""
-                    width="24px"></button>
-              </form>
-
-              {% endif %}
-
-              {% endwith %}
-              {% endwith %}
-              {% endwith %}
-            </br></br>
-              <div id="card{{post.id}}" class="mt-2">
-                {%for comment in comments%}
-                {%if comment.post.id == post.id%}
-                <p>
-                  <strong>{{comment.username.username}}
-                   
-                  </strong> {{comment.comment_content}}
-                </p>
-                {%endif%}
-                {%endfor%}
-
-                <form action="{%url 'welcome'%}" method="post" enctype="multipart/form-data">
-                  {%csrf_token%}
-                  <input type="hidden" name="idpost" style="position:relative;left:10px" value='{{post.id}}'>
-                  {% bootstrap_form form layout='inline' %}
-                  
-                </form>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
+      <div class="center">
+    <h1 style="text-align: center;margin-left: 250%">Hoodwatch</h1>
       </div>
-      <div class="col-md-3 col-lg-3 "></div>
-      {% endfor %} -->
 
     </div>
   </div>

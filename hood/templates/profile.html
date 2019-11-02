@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3">
+      {% if user.profile_pic %}
+      <img src="{{user.profile_pic.url}}" class="rounded img-fluid" alt="" width="200" height="200">
+      {% else %}
+      <img
+        src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
+        class="rounded img-fluid" alt="" width="200" height="200">
+      {% endif %}
+    </div>
+
+    <div class="col-md-3">
+      <p class="mt-1 font-weight-bold font-italic">{{user.username.username}}</p>
+      
+
+      {% if user == current_user %}
+      <a href="">
+        <button class="btn btn-dark" type="button" name="button"><img
+            src="https://img.icons8.com/color/48/000000/pencil.png" width="24">Edit Profile</button>
+      </a>
+      <p><strong>Following:</strong> {{following}}</p> 
+      <p><strong>Followers:</strong> {{follower}}</p>
+     
+      <p>{{user.fullname}}</p>
+      <p>{{user.bio | safe}}</p>
+      <a href="/logout/">
+        <button class="btn btn-danger" type="button" name="button"> <img
+            src="https://img.icons8.com/metro/48/000000/shutdown.png" width="24"> Logout</button>
+      </a>
+
+      {% endif %}
+
+
+      {% if user != current_user %}
+
+      {% with temp=request.user.id|stringformat:"i"|add:"-"  %}
+      {% with follow=user.id|stringformat:"i" %}
+      {% with tempfollow=temp|add:follow %}
+
+
+      {% if tempfollow in followz %}
+
+      {% else %}
+
+      <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <input type="hidden" name="follower" style="position:relative;left:10px" value='{{user.id}}'>
+        <button class="btn btn-success" type="submit">Follow</button>
+      </form>
+
+      {% endif %}
+
+      {% endwith %}
+      {% endwith %}
+      {% endwith %}
+
+      {% endif %}
+    </div>
+  </div>
+  <br>
+
+  {% if user == current_user %}
+  <a href="">
+    <button class="btn btn-secondary" type="button" name="button"><img
+        src="https://img.icons8.com/nolan/48/000000/plus-math.png" width="24"> Add Photo</button>
+  </a>
+  <br></br>
+  {% endif %}
+  <p><strong>POSTS:</strong></p> 
+  <!-- <div class="row">
+    {% for post in posts %}
+    <div class="col-md-4">
+      <a href="{{post.photo.url}}" data-fancybox="photo"
+        data-buttons='["zoom","slideShow","fullScreen","thumbs","share","close"]' 
+        data-caption=
+        '<p>{{post.upload_by.username}}</p>
+        <p>{{post.caption}}</p>
+        <input type="text" placeholder="Add Comment" name="" value="">'>
+        <img src="{{post.photo.url}}" alt="" width="300" height="200">
+      </a>
+    </div>
+    {% endfor %}
+  </div> -->
+
+</div>
+
+
+{% endblock %}
