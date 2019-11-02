@@ -30,12 +30,17 @@
       <button class="btn btn-danger" type="button" name="button"> <img
           src="https://img.icons8.com/metro/48/000000/shutdown.png" width="24"> Logout</button>
     </a>
-  <a href="">
+  <!-- <a href="">
     <button class="btn btn-secondary" type="button" name="button"><img
         src="https://img.icons8.com/nolan/48/000000/plus-math.png" width="24"> Add Photo</button>
-  </a>
+  </a> -->
   <br></br>
   {% endif %}
+  <div class="row">
+      <h4>There are no businesses by {{user.username}}
+        Register one <a style="color:#AD6A00;" href="{% url 'new_biz'  %}">here</a>
+      </h4>
+    </div>
 
 </div>
 
