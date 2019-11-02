@@ -15,6 +15,7 @@ urlpatterns=[
     url(r'^leave_hood/(\d+)', views.leave_hood, name='leave_hood'),
     url(r'^new/biz$', views.new_biz, name='new_biz'),
     url(r'^new/post$', views.new_post, name='new_post'),
+    url(r'^user/(?P<username>\w+)', views.user_profile, name='user_profile'),
    
 ]
 
