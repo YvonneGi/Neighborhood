@@ -77,3 +77,20 @@ def leave_hood(request, hood_id):
     if Join.objects.filter(user_id=request.user).exists():
         Join.objects.get(user_id=request.user).delete()
         return redirect('welcome')
+
+
+@login_required(login_url='/accounts/login/')
+def new_biz(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddBizForm(request.POST, request.FILES)
+        if form.is_valid():
+            biz = form.save(commit=False)
+            biz.biz_owner = current_user
+            biz.biz_hood = request.user.join.hood_id
+            biz.save()
+        return redirect('welcome')
+
+    else:
+        form = AddBizForm()
+    return render(request, 'new_biz.html', {"form": form})
