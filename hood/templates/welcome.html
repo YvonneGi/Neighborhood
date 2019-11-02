@@ -26,10 +26,14 @@
   {% block content %}
 
   <div class="container-fluid">
+      <div class="title">
+          <h1 id="mainheading" style="text-align:center;" class="display-4"> Hoodwatch</h1>
+      </div>
     <div class="row">
-      <h1 id="mainheading" style="text-align:center;" class="display-4"> Hoodwatch</h1>
+      
+      
       <h2>Don't see your hood ?
-        Register it <a style="color:#AD6A00;" href="{% url 'add_hood'  %}">here</a>
+        Register it <a style="color:#AD6A00;" href="{% url 'new_hood'  %}">here</a>
       </h2>
       <div class="card-columns">
         {% for hood in hoods%}
