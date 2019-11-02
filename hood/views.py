@@ -93,4 +93,4 @@ def new_biz(request):
 
     else:
         form = AddBizForm()
-    return render(request, 'new_biz.html', {"form": form})
+    return render(request, 'add_biz.html', {"form": form})
