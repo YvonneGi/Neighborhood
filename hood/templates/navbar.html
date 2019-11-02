@@ -42,8 +42,13 @@
       </div>
       <div id='right'>
         <a class="mr-2" href="{% url 'profile' request.user.id %}">
-        <img src='https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1' 
-          class='nav-icon' width="20" height="20"></a>
+            {% if user.profile.profile_pic %}
+            <img style="border-radius:50%;" src="{{user.profile.profile_pic.url}}" alt="" width="70" height="70">
+            {% else %}
+            <img
+              src='https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'
+              class='nav-icon' width="70" height="70">
+            {% endif %}</a>
 
       </div>
     </div>
