@@ -43,3 +43,52 @@ class Profile(models.Model):
 
         self.delete()
 
+class Neighborhood(models.Model):
+    location = models.CharField(max_length=30, default="e.g Kigali, Byumba, Kibungo etc")
+    name = models.CharField(max_length=30)
+    occupants_count = models.IntegerField(default=0, blank=True)
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hoods', blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    '''
+    this is added to ensure the linter has no errors saying class has no objects member in VS Code IDE
+    '''
+    objects = models.Manager()
+
+    @classmethod
+    def search_neighborhood_by_name(cls, search_term):
+        neighborhoods = cls.objects.filter(name__icontains=search_term)
+        return neighborhoods
+
+    @classmethod
+    def one_neighborhood(cls, id):
+        neighborhood = Neighborhood.objects.filter(id=id)
+        return neighborhood
+
+    @classmethod
+    def all_neighborhoods(cls):
+        neighborhoods = cls.objects.all()
+        return neighborhoods
+
+    @classmethod
+    def get_neighborhood_by_id(cls, id):
+        neighborhood = Neighborhood.objects.filter(id=Neighborhood.id)
+        return neighborhood
+
+    @classmethod
+    def get_all_profiles(cls):
+        profile = Profile.objects.all()
+        return profile
+
+
+    def update_neighborhood(self):
+
+        ''' Method to update a neighborhood in the database'''
+
+        self.update()
+
+    def delete_neighborhood(self):
+
+        ''' Method to delete a neighborhood from the database'''
+
+        self.delete()
+
