@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 from .models import *
+from .email import *
 import datetime as dt
 
 # Create your views here.
