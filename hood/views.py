@@ -2,9 +2,6 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-# from .models import Profile,User
-# from .forms import ProfileForm
-# from django.db.models import Q
 from .forms import *
 from .models import *
 import datetime as dt
@@ -15,7 +12,8 @@ import datetime as dt
 #     profiles= Profile.objects.all()
 #     current_user = request.user
 #     return render(request,'welcome.html',{"profiles":profiles,"current_user":current_user})
-# @login_required(login_url='/accounts/login/')
+
+@login_required(login_url='/accounts/login/')
 def welcome(request):
     if request.user.is_authenticated:
         if Join.objects.filter(user_id=request.user).exists():
