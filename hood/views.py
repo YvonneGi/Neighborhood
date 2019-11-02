@@ -53,3 +53,18 @@ def new_hood(request):
     else:
         form = AddHoodForm()
     return render(request, 'add_hood.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def join_hood(request, hood_id):
+    '''
+    This view function will implement adding 
+    '''
+    neighborhood = Neighborhood.objects.get(pk=hood_id)
+    if Join.objects.filter(user_id=request.user).exists():
+
+        Join.objects.filter(user_id=request.user).update(hood_id=neighborhood)
+    else:
+
+        Join(user_id=request.user, hood_id=neighborhood).save()
+
+    return redirect('welcome')
