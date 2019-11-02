@@ -45,7 +45,7 @@
 
 
             <h3 id="text" class="card-title">Hood: {{hood.name }}</h4>
-            <h4 id="text" class="card-title">Location: {{hood.locality | upper}}</h6>
+            <h4 id="text" class="card-title">Location: {{hood.location | upper}}</h6>
 
             <h5 id="text" class="card-title">Occupants: {{hood.occupants_count | upper}}</h5>
             <a href="{% url 'join_hood' hood.id  %}" class="btn btn-sm btn-success">Join</a>
