@@ -2,10 +2,12 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Profile,User
-from .forms import ProfileForm
+# from .models import Profile,User
+# from .forms import ProfileForm
 # from django.db.models import Q
-# import datetime as dt
+from .forms import *
+from .models import *
+import datetime as dt
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -36,3 +38,18 @@ def edit_profile(request):
         form=ProfileForm(instance=request.user.profile)
      
     return render(request,'edit_profile.html',locals())
+
+@login_required(login_url='/accounts/login/')
+def add_hood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit=False)
+            hood.user_profile = current_user
+            hood.save()
+        return redirect('welcome')
+
+    else:
+        form = AddHoodForm()
+    return render(request, 'add_hood.html', {"form": form})
