@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+{{ block.super}}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<div class="container">
+    <br>
+
+    {% if businesses%}
+    <h1 id="text" style="color:white">Found {{ businesses|length }} businesses of searched term : {{message}}</h1>
+
+    {% else %}
+    <br>
+
+    <h1 id="text" style="color:white"> Found 0 businesses for the search term : {{message}}</h1>
+
+
+    {% endif %}
+
+
+    <br>
+    {% if businesses %}
+    <div class="card-columns">
+
+        {% for business in businesses %}
+        <div class="card" style="width:100%;">
+
+            <div class="card-body" style="background-color:#eceff1;">
+                <h5>{{business.name | upper}}</h5>
+                <h5>{{business.description | safe}}</h5>
+                <p>{{business.email }}</p>
+                <p>Location: {{business.biz_hood.name}}</p>
+                <p>Owner:<a style="width:100%; padding-left:10px;" href="{% url 'user_profile' username=business.biz_owner.username %}">
+
+                        <label>{{business.biz_owner.username}}</label></a> </p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row">
+            <h2 id="text" class="text-center">There are no businesses here</h2>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
