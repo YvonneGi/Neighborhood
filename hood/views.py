@@ -94,3 +94,19 @@ def new_biz(request):
     else:
         form = AddBizForm()
     return render(request, 'add_biz.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def new_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = AddPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.poster = current_user
+            post.post_hood = request.user.join.hood_id
+            post.save()
+        return redirect('welcome')
+
+    else:
+        form = AddPostForm()
+    return render(request, 'add_post.html', {"form": form})
