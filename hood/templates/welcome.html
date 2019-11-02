@@ -27,12 +27,10 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="title">
-        <h1 style="text-align: center;margin-left: 250%">Hoodwatch</h1>
-      </div>
-      <h4>Don't see your hood ?
-        Register it <a style="color:#AD6A00;" href="{% url 'new_hood'  %}">here</a>
-      </h4>
+      <h1 id="mainheading" style="text-align:center;" class="display-4"> Hoodwatch</h1>
+      <h2>Don't see your hood ?
+        Register it <a style="color:#AD6A00;" href="{% url 'add_hood'  %}">here</a>
+      </h2>
       <div class="card-columns">
         {% for hood in hoods%}
 
@@ -42,15 +40,15 @@
           <div class="card-body" style="background-color:#eceff1;">
 
 
-            <h4 id="text" class="card-title">Hood: {{hood.name }}</h4>
-            <h6 id="text" class="card-title">Location: {{hood.locality | upper}}</h6>
+            <h3 id="text" class="card-title">Hood: {{hood.name }}</h4>
+            <h4 id="text" class="card-title">Location: {{hood.locality | upper}}</h6>
 
             <h5 id="text" class="card-title">Occupants: {{hood.occupants_count | upper}}</h5>
-
             <a href="{% url 'join_hood' hood.id  %}" class="btn btn-sm btn-success">Join</a>
           </div>
-
         </div>
+        {% endfor %}
+
       </div>
     </div>
   </div>
