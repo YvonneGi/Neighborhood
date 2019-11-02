@@ -8,7 +8,6 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         exclude=['']
 
-
 class AddHoodForm(forms.ModelForm):
     class Meta:
         model = Neighborhood
